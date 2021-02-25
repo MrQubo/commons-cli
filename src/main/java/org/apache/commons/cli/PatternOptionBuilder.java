@@ -1,18 +1,18 @@
-/**
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/*
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  */
 
 package org.apache.commons.cli;
@@ -27,7 +27,7 @@ import java.util.Date;
  * The pattern contains various single character flags and via
  * an optional punctuation character, their expected type.
  * </p>
- * 
+ *
  * <table border="1">
  *   <caption>Overview of PatternOptionBuilder patterns</caption>
  *   <tr><td>a</td><td>-a flag</td></tr>
@@ -38,7 +38,7 @@ import java.util.Date;
  *   <tr><td>f/</td><td>-f [url]</td></tr>
  *   <tr><td>g:</td><td>-g [string]</td></tr>
  * </table>
- * 
+ *
  * <p>
  * For example, the following allows command line flags of '-v -p string-value -f /dir/file'.
  * The exclamation mark precede a mandatory option.
@@ -168,7 +168,7 @@ public class PatternOptionBuilder
                         .required(required)
                         .type(type)
                         .build();
-                    
+
                     // we have a previous one to deal with
                     options.addOption(option);
                     required = false;
@@ -195,7 +195,7 @@ public class PatternOptionBuilder
                 .required(required)
                 .type(type)
                 .build();
-            
+
             // we have a final one to deal with
             options.addOption(option);
         }

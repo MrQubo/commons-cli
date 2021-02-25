@@ -1,18 +1,18 @@
-/**
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/*
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  */
 
 package org.apache.commons.cli;
@@ -61,7 +61,7 @@ public class ValuesTest
                                        "-h", "val2",
                                        "-jkey=value",
                                        "-j", "key=value",
-                                       "-kkey1=value1", 
+                                       "-kkey1=value1",
                                        "-kkey2=value2",
                                        "-mkey=value"};
 
@@ -142,7 +142,7 @@ public class ValuesTest
 
     /**
      * jkeyes - commented out this test as the new architecture
-     * breaks this type of functionality.  I have left the test 
+     * breaks this type of functionality.  I have left the test
      * here in case I get a brainwave on how to resolve this.
      */
     /*
@@ -159,7 +159,7 @@ public class ValuesTest
             fail( "IndexOutOfBounds not caught" );
         }
         catch( IndexOutOfBoundsException exp ) {
-            
+
         }
 
         try {

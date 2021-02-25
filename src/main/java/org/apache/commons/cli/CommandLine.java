@@ -1,18 +1,18 @@
-/**
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/*
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  */
 
 package org.apache.commons.cli;
@@ -41,10 +41,10 @@ public class CommandLine implements Serializable
     private static final long serialVersionUID = 1L;
 
     /** the unrecognized options/arguments */
-    private final List<String> args = new LinkedList<String>();
+    private final List<String> args = new LinkedList<>();
 
     /** the processed options */
-    private final List<Option> options = new ArrayList<Option>();
+    private final List<Option> options = new ArrayList<>();
 
     /**
      * Creates a command line.
@@ -55,7 +55,7 @@ public class CommandLine implements Serializable
     }
 
     /**
-     * Query to see if an option has been set.
+     * Tests to see if an option has been set.
      *
      * @param opt the option to check.
      * @return true if set, false if not.
@@ -67,7 +67,7 @@ public class CommandLine implements Serializable
     }
 
     /**
-     * Query to see if an option has been set.
+     * Tests to see if an option has been set.
      *
      * @param opt Short name of the option.
      * @return true if set, false if not.
@@ -78,7 +78,7 @@ public class CommandLine implements Serializable
     }
 
     /**
-     * Query to see if an option has been set.
+     * Tests to see if an option has been set.
      *
      * @param opt character name of the option.
      * @return true if set, false if not.
@@ -167,6 +167,7 @@ public class CommandLine implements Serializable
      * @param opt the name of the option.
      * @return the type of opt.
      */
+    @Deprecated
     public Object getOptionObject(final char opt)
     {
         return getOptionObject(String.valueOf(opt));
@@ -224,7 +225,7 @@ public class CommandLine implements Serializable
      */
     public String[] getOptionValues(final Option option)
     {
-        final List<String> values = new ArrayList<String>();
+        final List<String> values = new ArrayList<>();
 
         for (final Option processedOption : options)
         {
@@ -332,14 +333,14 @@ public class CommandLine implements Serializable
 
     /**
      * Retrieve the map of values associated to the option. This is convenient
-     * for options specifying Java properties like <tt>-Dparam1=value1
-     * -Dparam2=value2</tt>. The first argument of the option is the key, and
+     * for options specifying Java properties like <code>-Dparam1=value1
+     * -Dparam2=value2</code>. The first argument of the option is the key, and
      * the 2nd argument is the value. If the option has only one argument
-     * (<tt>-Dfoo</tt>) it is considered as a boolean flag and the value is
-     * <tt>"true"</tt>.
+     * (<code>-Dfoo</code>) it is considered as a boolean flag and the value is
+     * <code>"true"</code>.
      *
      * @param option name of the option.
-     * @return The Properties mapped by the option, never <tt>null</tt>
+     * @return The Properties mapped by the option, never <code>null</code>
      *         even if the option doesn't exists.
      * @since 1.5
      */
@@ -370,14 +371,14 @@ public class CommandLine implements Serializable
 
     /**
      * Retrieve the map of values associated to the option. This is convenient
-     * for options specifying Java properties like <tt>-Dparam1=value1
-     * -Dparam2=value2</tt>. The first argument of the option is the key, and
+     * for options specifying Java properties like <code>-Dparam1=value1
+     * -Dparam2=value2</code>. The first argument of the option is the key, and
      * the 2nd argument is the value. If the option has only one argument
-     * (<tt>-Dfoo</tt>) it is considered as a boolean flag and the value is
-     * <tt>"true"</tt>.
+     * (<code>-Dfoo</code>) it is considered as a boolean flag and the value is
+     * <code>"true"</code>.
      *
      * @param opt name of the option.
-     * @return The Properties mapped by the option, never <tt>null</tt>
+     * @return The Properties mapped by the option, never <code>null</code>
      *         even if the option doesn't exists.
      * @since 1.2
      */
@@ -492,7 +493,7 @@ public class CommandLine implements Serializable
     {
         final Collection<Option> processed = options;
 
-        // reinitialise array
+        // reinitialize array
         final Option[] optionsArray = new Option[processed.size()];
 
         // return the array

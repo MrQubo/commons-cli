@@ -1,18 +1,18 @@
-/**
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/*
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  */
 
 package org.apache.commons.cli;
@@ -82,7 +82,7 @@ public class OptionsTest
         final Option shortOnly2 = OptionBuilder.create("2");
         final Option bothA = OptionBuilder.withLongOpt("bothA").create("a");
         final Option bothB = OptionBuilder.withLongOpt("bothB").create("b");
-        
+
         final Options options = new Options();
         options.addOption(longOnly1);
         options.addOption(longOnly2);
@@ -90,19 +90,19 @@ public class OptionsTest
         options.addOption(shortOnly2);
         options.addOption(bothA);
         options.addOption(bothB);
-        
-        final Collection<Option> allOptions = new ArrayList<Option>();
+
+        final Collection<Option> allOptions = new ArrayList<>();
         allOptions.add(longOnly1);
         allOptions.add(longOnly2);
         allOptions.add(shortOnly1);
         allOptions.add(shortOnly2);
         allOptions.add(bothA);
         allOptions.add(bothB);
-        
+
         final Collection<Option> helpOptions = options.helpOptions();
-        
+
         assertTrue("Everything in all should be in help", helpOptions.containsAll(allOptions));
-        assertTrue("Everything in help should be in all", allOptions.containsAll(helpOptions));        
+        assertTrue("Everything in help should be in all", allOptions.containsAll(helpOptions));
     }
 
     @Test
@@ -170,14 +170,14 @@ public class OptionsTest
         assertNotNull(options.getOptionGroups());
         assertEquals(2, options.getOptionGroups().size());
     }
-    
+
     @Test
     public void testGetMatchingOpts()
     {
         final Options options = new Options();
         options.addOption(OptionBuilder.withLongOpt("version").create());
         options.addOption(OptionBuilder.withLongOpt("verbose").create());
-        
+
         assertTrue(options.getMatchingOptions("foo").isEmpty());
         assertEquals(1, options.getMatchingOptions("version").size());
         assertEquals(2, options.getMatchingOptions("ver").size());

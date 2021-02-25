@@ -1,18 +1,18 @@
-/**
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/*
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  */
 
 package org.apache.commons.cli;
@@ -55,7 +55,7 @@ public class TypeHandlerTest
     public void testCreateValueObject_InstantiableClass()
         throws Exception
     {
-        Object result = TypeHandler.createValue(Instantiable.class.getName(), PatternOptionBuilder.OBJECT_VALUE);
+        final Object result = TypeHandler.createValue(Instantiable.class.getName(), PatternOptionBuilder.OBJECT_VALUE);
         assertTrue(result instanceof Instantiable);
     }
 
@@ -98,7 +98,7 @@ public class TypeHandlerTest
     public void testCreateValueClass()
         throws Exception
     {
-        Object clazz = TypeHandler.createValue(Instantiable.class.getName(), PatternOptionBuilder.CLASS_VALUE);
+        final Object clazz = TypeHandler.createValue(Instantiable.class.getName(), PatternOptionBuilder.CLASS_VALUE);
         assertEquals(Instantiable.class, clazz);
     }
 
@@ -106,7 +106,7 @@ public class TypeHandlerTest
     public void testCreateValueFile()
             throws Exception
     {
-        File result = TypeHandler.createValue("some-file.txt", PatternOptionBuilder.FILE_VALUE);
+        final File result = TypeHandler.createValue("some-file.txt", PatternOptionBuilder.FILE_VALUE);
         assertEquals("some-file.txt", result.getName());
     }
 
@@ -114,7 +114,7 @@ public class TypeHandlerTest
     public void testCreateValueExistingFile()
             throws Exception
     {
-        FileInputStream result = TypeHandler.createValue("src/test/resources/existing-readable.file", PatternOptionBuilder.EXISTING_FILE_VALUE);
+        final FileInputStream result = TypeHandler.createValue("src/test/resources/org/apache/commons/cli/existing-readable.file", PatternOptionBuilder.EXISTING_FILE_VALUE);
         assertNotNull(result);
     }
 
@@ -136,8 +136,8 @@ public class TypeHandlerTest
     public void testCreateValueURL()
             throws Exception
     {
-        String urlString = "http://commons.apache.org";
-        URL result = TypeHandler.createValue(urlString, PatternOptionBuilder.URL_VALUE);
+        final String urlString = "https://commons.apache.org";
+        final URL result = TypeHandler.createValue(urlString, PatternOptionBuilder.URL_VALUE);
         assertEquals(urlString, result.toString());
     }
 

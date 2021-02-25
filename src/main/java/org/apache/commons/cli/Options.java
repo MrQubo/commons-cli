@@ -1,18 +1,18 @@
-/**
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/*
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  */
 
 package org.apache.commons.cli;
@@ -44,18 +44,18 @@ public class Options implements Serializable
     private static final long serialVersionUID = 1L;
 
     /** a map of the options with the character key */
-    private final Map<String, Option> shortOpts = new LinkedHashMap<String, Option>();
+    private final Map<String, Option> shortOpts = new LinkedHashMap<>();
 
     /** a map of the options with the long key */
-    private final Map<String, Option> longOpts = new LinkedHashMap<String, Option>();
+    private final Map<String, Option> longOpts = new LinkedHashMap<>();
 
     /** a map of the required options */
     // N.B. This can contain either a String (addOption) or an OptionGroup (addOptionGroup)
     // TODO this seems wrong
-    private final List<Object> requiredOpts = new ArrayList<Object>();
+    private final List<Object> requiredOpts = new ArrayList<>();
 
     /** a map of the option groups */
-    private final Map<String, OptionGroup> optionGroups = new LinkedHashMap<String, OptionGroup>();
+    private final Map<String, OptionGroup> optionGroups = new LinkedHashMap<>();
 
     /**
      * Add the specified option group.
@@ -91,12 +91,12 @@ public class Options implements Serializable
      */
     Collection<OptionGroup> getOptionGroups()
     {
-        return new HashSet<OptionGroup>(optionGroups.values());
+        return new HashSet<>(optionGroups.values());
     }
 
     /**
      * Add an option that only contains a short name.
-     * 
+     *
      * <p>
      * The option does not take an argument.
      * </p>
@@ -151,7 +151,7 @@ public class Options implements Serializable
 
     /**
      * Add an option that contains a short-name and a long-name.
-     * 
+     *
      * <p>
      * The added option is set as required. It may be specified as requiring an argument. This method is a shortcut for:
      * </p>
@@ -227,7 +227,7 @@ public class Options implements Serializable
      */
     List<Option> helpOptions()
     {
-        return new ArrayList<Option>(shortOpts.values());
+        return new ArrayList<>(shortOpts.values());
     }
 
     /**
@@ -264,7 +264,7 @@ public class Options implements Serializable
 
     /**
      * Returns the options with a long name starting with the name specified.
-     * 
+     *
      * @param opt the partial name of the option
      * @return the options matching the partial name specified, or an empty list if none matches
      * @since 1.3
@@ -272,11 +272,11 @@ public class Options implements Serializable
     public List<String> getMatchingOptions(String opt)
     {
         opt = Util.stripLeadingHyphens(opt);
-        
-        final List<String> matchingOpts = new ArrayList<String>();
+
+        final List<String> matchingOpts = new ArrayList<>();
 
         // for a perfect match return the single option only
-        if (longOpts.keySet().contains(opt))
+        if (longOpts.containsKey(opt))
         {
             return Collections.singletonList(opt);
         }
@@ -288,7 +288,7 @@ public class Options implements Serializable
                 matchingOpts.add(longOpt);
             }
         }
-        
+
         return matchingOpts;
     }
 

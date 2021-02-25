@@ -1,18 +1,18 @@
-/**
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/*
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  */
 
 package org.apache.commons.cli;
@@ -40,7 +40,7 @@ public class TypeHandler
      *
      * @param str the command line value
      * @param obj the type of argument
-     * @return The instance of <code>obj</code> initialised with
+     * @return The instance of <code>obj</code> initialized with
      * the value of <code>str</code>.
      * @throws ParseException if the value creation for the given object type failed
      */
@@ -54,8 +54,9 @@ public class TypeHandler
      * with the value of <code>str</code>.
      *
      * @param str the command line value
-     * @param clazz the type of argument
-     * @return The instance of <code>clazz</code> initialised with
+     * @param clazz the class representing the type of argument
+     * @param <T> type of argument
+     * @return The instance of <code>clazz</code> initialized with
      * the value of <code>str</code>.
      * @throws ParseException if the value creation for the given class failed
      */
@@ -108,12 +109,12 @@ public class TypeHandler
       * Create an Object from the classname and empty constructor.
       *
       * @param classname the argument value
-      * @return the initialised object
+      * @return the initialized object
       * @throws ParseException if the class could not be found or the object could not be created
       */
     public static Object createObject(final String classname) throws ParseException
     {
-        Class<?> cl;
+        final Class<?> cl;
 
         try
         {
@@ -123,7 +124,7 @@ public class TypeHandler
         {
             throw new ParseException("Unable to find the class: " + classname);
         }
-        
+
         try
         {
             return cl.newInstance();
@@ -230,13 +231,13 @@ public class TypeHandler
      * @return The file input stream represented by <code>str</code>.
      * @throws ParseException if the file is not exist or not readable
      */
-    public static FileInputStream openFile(String str) throws ParseException
+    public static FileInputStream openFile(final String str) throws ParseException
     {
         try
         {
             return new FileInputStream(str);
         }
-        catch (FileNotFoundException e)
+        catch (final FileNotFoundException e)
         {
             throw new ParseException("Unable to find file: " + str);
         }

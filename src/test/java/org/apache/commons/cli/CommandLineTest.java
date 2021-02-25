@@ -1,18 +1,18 @@
-/**
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/*
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  */
 
 package org.apache.commons.cli;
@@ -50,7 +50,7 @@ public class CommandLineTest
 
         assertEquals("property with long format", "bar", cl.getOptionProperties("property").getProperty("foo"));
     }
-    
+
     @Test
     public void testGetOptionPropertiesWithOption() throws Exception
     {
@@ -82,11 +82,11 @@ public class CommandLineTest
         final CommandLine cmd = new CommandLine();
         assertNotNull(cmd.getOptions());
         assertEquals(0, cmd.getOptions().length);
-        
+
         cmd.addOption(new Option("a", null));
         cmd.addOption(new Option("b", null));
         cmd.addOption(new Option("c", null));
-        
+
         assertEquals(3, cmd.getOptions().length);
     }
 
@@ -95,27 +95,27 @@ public class CommandLineTest
         final Options options = new Options();
         options.addOption(OptionBuilder.hasArg().withType(Number.class).create("i"));
         options.addOption(OptionBuilder.hasArg().create("f"));
-        
+
         final CommandLineParser parser = new DefaultParser();
         final CommandLine cmd = parser.parse(options, new String[] { "-i", "123", "-f", "foo" });
-        
+
         assertEquals(123, ((Number) cmd.getParsedOptionValue("i")).intValue());
         assertEquals("foo", cmd.getParsedOptionValue("f"));
     }
-    
+
     @Test
     public void testGetParsedOptionValueWithChar() throws Exception {
         final Options options = new Options();
         options.addOption(Option.builder("i").hasArg().type(Number.class).build());
         options.addOption(Option.builder("f").hasArg().build());
-        
+
         final CommandLineParser parser = new DefaultParser();
         final CommandLine cmd = parser.parse(options, new String[] { "-i", "123", "-f", "foo" });
-        
+
         assertEquals(123, ((Number) cmd.getParsedOptionValue('i')).intValue());
         assertEquals("foo", cmd.getParsedOptionValue('f'));
     }
-    
+
     @Test
     public void testGetParsedOptionValueWithOption() throws Exception {
         final Options options = new Options();
@@ -123,14 +123,14 @@ public class CommandLineTest
         final Option opt_f = Option.builder("f").hasArg().build();
         options.addOption(opt_i);
         options.addOption(opt_f);
-        
+
         final CommandLineParser parser = new DefaultParser();
         final CommandLine cmd = parser.parse(options, new String[] { "-i", "123", "-f", "foo" });
-        
+
         assertEquals(123, ((Number) cmd.getParsedOptionValue(opt_i)).intValue());
         assertEquals("foo", cmd.getParsedOptionValue(opt_f));
     }
-    
+
     @Test
     public void testNullhOption() throws Exception {
         final Options options = new Options();

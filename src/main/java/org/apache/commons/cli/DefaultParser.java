@@ -1,18 +1,18 @@
-/**
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/*
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  */
 
 package org.apache.commons.cli;
@@ -31,31 +31,31 @@ public class DefaultParser implements CommandLineParser
 {
     /** The command-line instance. */
     protected CommandLine cmd;
-    
+
     /** The current options. */
     protected Options options;
 
     /**
-     * Flag indicating how unrecognized tokens are handled. <tt>true</tt> to stop
+     * Flag indicating how unrecognized tokens are handled. <code>true</code> to stop
      * the parsing and add the remaining tokens to the args list.
-     * <tt>false</tt> to throw an exception. 
+     * <code>false</code> to throw an exception.
      */
     protected boolean stopAtNonOption;
 
     /** The token currently processed. */
     protected String currentToken;
- 
+
     /** The last option parsed. */
     protected Option currentOption;
- 
+
     /** Flag indicating if tokens should no longer be analyzed and simply added as arguments of the command line. */
     protected boolean skipParsing;
- 
+
     /** The required options and groups expected to be found when parsing the command line. */
     protected List expectedOpts;
 
     /** Flag indicating if partial matching of long options is supported. */
-    private  boolean allowPartialMatching;
+    private final  boolean allowPartialMatching;
 
     /**
      * Creates a new DefaultParser instance with partial matching enabled.
@@ -101,6 +101,7 @@ public class DefaultParser implements CommandLineParser
         this.allowPartialMatching = allowPartialMatching;
     }
 
+    @Override
     public CommandLine parse(final Options options, final String[] arguments) throws ParseException
     {
         return parse(options, arguments, null);
@@ -122,6 +123,7 @@ public class DefaultParser implements CommandLineParser
         return parse(options, arguments, properties, false);
     }
 
+    @Override
     public CommandLine parse(final Options options, final String[] arguments, final boolean stopAtNonOption) throws ParseException
     {
         return parse(options, arguments, null, stopAtNonOption);
@@ -133,9 +135,9 @@ public class DefaultParser implements CommandLineParser
      * @param options         the specified Options
      * @param arguments       the command line arguments
      * @param properties      command line option name-value pairs
-     * @param stopAtNonOption if <tt>true</tt> an unrecognized argument stops
-     *     the parsing and the remaining arguments are added to the 
-     *     {@link CommandLine}s args list. If <tt>false</tt> an unrecognized
+     * @param stopAtNonOption if <code>true</code> an unrecognized argument stops
+     *     the parsing and the remaining arguments are added to the
+     *     {@link CommandLine}s args list. If <code>false</code> an unrecognized
      *     argument triggers a ParseException.
      *
      * @return the list of atomic option and value tokens
@@ -339,7 +341,7 @@ public class DefaultParser implements CommandLineParser
 
     /**
      * Tells if the token looks like a short option.
-     * 
+     *
      * @param token
      */
     private boolean isShortOption(final String token)
@@ -358,7 +360,7 @@ public class DefaultParser implements CommandLineParser
             return true;
         }
         // check for several concatenated short options
-        return optName.length() > 0 && options.hasShortOption(String.valueOf(optName.charAt(0)));
+        return !optName.isEmpty() && options.hasShortOption(String.valueOf(optName.charAt(0)));
     }
 
     /**
@@ -391,10 +393,10 @@ public class DefaultParser implements CommandLineParser
     }
 
     /**
-     * Handles an unknown token. If the token starts with a dash an 
-     * UnrecognizedOptionException is thrown. Otherwise the token is added 
-     * to the arguments of the command line. If the stopAtNonOption flag 
-     * is set, this stops the parsing and the remaining tokens are added 
+     * Handles an unknown token. If the token starts with a dash an
+     * UnrecognizedOptionException is thrown. Otherwise the token is added
+     * to the arguments of the command line. If the stopAtNonOption flag
+     * is set, this stops the parsing and the remaining tokens are added
      * as-is in the arguments of the command line.
      *
      * @param token the command line token to handle
@@ -442,7 +444,7 @@ public class DefaultParser implements CommandLineParser
      * -L
      * --l
      * -l
-     * 
+     *
      * @param token the command line token to handle
      */
     private void handleLongOptionWithoutEqual(final String token) throws ParseException
@@ -639,7 +641,7 @@ public class DefaultParser implements CommandLineParser
                 break;
             }
         }
-        
+
         return opt;
     }
 
@@ -714,17 +716,14 @@ public class DefaultParser implements CommandLineParser
         {
             return options.getMatchingOptions(token);
         }
-        else
+        final List<String> matches = new ArrayList<>(1);
+        if (options.hasLongOption(token))
         {
-            List<String> matches = new ArrayList<String>(1);
-            if (options.hasLongOption(token))
-            {
-                Option option = options.getOption(token);
-                matches.add(option.getLongOpt());
-            }
-
-            return matches;
+            final Option option = options.getOption(token);
+            matches.add(option.getLongOpt());
         }
+
+        return matches;
     }
 
     /**

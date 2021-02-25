@@ -1,18 +1,18 @@
-/**
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/*
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  */
 
 package org.apache.commons.cli;
@@ -82,6 +82,7 @@ public abstract class Parser implements CommandLineParser
      * @throws ParseException if there are any problems encountered
      *                        while parsing the command line tokens.
      */
+    @Override
     public CommandLine parse(final Options options, final String[] arguments) throws ParseException
     {
         return parse(options, arguments, null, false);
@@ -110,13 +111,14 @@ public abstract class Parser implements CommandLineParser
      *
      * @param options         the <code>Options</code>
      * @param arguments       the <code>arguments</code>
-     * @param stopAtNonOption if <tt>true</tt> an unrecognized argument stops
-     *     the parsing and the remaining arguments are added to the 
-     *     {@link CommandLine}s args list. If <tt>false</tt> an unrecognized
+     * @param stopAtNonOption if <code>true</code> an unrecognized argument stops
+     *     the parsing and the remaining arguments are added to the
+     *     {@link CommandLine}s args list. If <code>false</code> an unrecognized
      *     argument triggers a ParseException.
      * @return the <code>CommandLine</code>
      * @throws ParseException if an error occurs when parsing the arguments.
      */
+    @Override
     public CommandLine parse(final Options options, final String[] arguments, final boolean stopAtNonOption) throws ParseException
     {
         return parse(options, arguments, null, stopAtNonOption);
@@ -129,9 +131,9 @@ public abstract class Parser implements CommandLineParser
      * @param options the specified Options
      * @param arguments the command line arguments
      * @param properties command line option name-value pairs
-     * @param stopAtNonOption if <tt>true</tt> an unrecognized argument stops
-     *     the parsing and the remaining arguments are added to the 
-     *     {@link CommandLine}s args list. If <tt>false</tt> an unrecognized
+     * @param stopAtNonOption if <code>true</code> an unrecognized argument stops
+     *     the parsing and the remaining arguments are added to the
+     *     {@link CommandLine}s args list. If <code>false</code> an unrecognized
      *     argument triggers a ParseException.
      *
      * @return the list of atomic option and value tokens
@@ -149,14 +151,14 @@ public abstract class Parser implements CommandLineParser
         {
             opt.clearValues();
         }
-        
+
         // clear the data from the groups
         for (final OptionGroup group : options.getOptionGroups())
         {
             group.setSelected(null);
-        }        
+        }
 
-        // initialise members
+        // initialize members
         setOptions(options);
 
         cmd = new CommandLine();
@@ -260,17 +262,17 @@ public abstract class Parser implements CommandLineParser
         for (final Enumeration<?> e = properties.propertyNames(); e.hasMoreElements();)
         {
             final String option = e.nextElement().toString();
-            
+
             final Option opt = options.getOption(option);
             if (opt == null)
             {
                 throw new UnrecognizedOptionException("Default option wasn't defined", option);
             }
-            
+
             // if the option is part of a group, check if another option of the group has been selected
             final OptionGroup group = options.getOptionGroup(opt);
             final boolean selected = group != null && group.getSelected() != null;
-            
+
             if (!cmd.hasOption(option) && !selected)
             {
                 // get the value from the properties instance
@@ -337,7 +339,7 @@ public abstract class Parser implements CommandLineParser
         while (iter.hasNext())
         {
             final String str = iter.next();
-            
+
             // found an Option, not an argument
             if (getOptions().hasOption(str) && str.startsWith("-"))
             {
@@ -384,23 +386,23 @@ public abstract class Parser implements CommandLineParser
 
         // get the option represented by arg
         final Option opt = (Option) getOptions().getOption(arg).clone();
-        
+
         // update the required options and groups
         updateRequiredOptions(opt);
-        
+
         // if the option takes an argument value
         if (opt.hasArg())
         {
             processArgs(opt, iter);
         }
-        
+
         // set the option on the command line
         cmd.addOption(opt);
     }
 
     /**
      * Removes the option or its group from the list of expected elements.
-     * 
+     *
      * @param opt
      */
     private void updateRequiredOptions(final Option opt) throws ParseException

@@ -1,18 +1,18 @@
-/**
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/*
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  */
 
 package org.apache.commons.cli;
@@ -27,7 +27,7 @@ import java.util.Comparator;
 
 import org.junit.Test;
 
-/** 
+/**
  * Test case for the HelpFormatter class.
  */
 public class HelpFormatterTest
@@ -94,22 +94,22 @@ public class HelpFormatterTest
         String text = "This is a test.";
         // text width should be max 8; the wrap position is 7
         assertEquals("wrap position", 7, hf.findWrapPos(text, 8, 0));
-        
+
         // starting from 8 must give -1 - the wrap pos is after end
         assertEquals("wrap position 2", -1, hf.findWrapPos(text, 8, 8));
-        
+
         // words longer than the width are cut
         text = "aaaa aa";
         assertEquals("wrap position 3", 3, hf.findWrapPos(text, 3, 0));
-        
+
         // last word length is equal to the width
         text = "aaaaaa aaaaaa";
         assertEquals("wrap position 4", 6, hf.findWrapPos(text, 6, 0));
         assertEquals("wrap position 4", -1, hf.findWrapPos(text, 6, 7));
-        
+
         text = "aaaaaa\n aaaaaa";
         assertEquals("wrap position 5", 7, hf.findWrapPos(text, 6, 0));
-        
+
         text = "aaaaaa\t aaaaaa";
         assertEquals("wrap position 6", 7, hf.findWrapPos(text, 6, 0));
     }
@@ -120,9 +120,9 @@ public class HelpFormatterTest
         final int width = 7;
         final int padding = 0;
         final String text = "Thisisatest.";
-        final String expected = "Thisisa" + EOL + 
+        final String expected = "Thisisa" + EOL +
                           "test.";
-        
+
         final StringBuffer sb = new StringBuffer();
         new HelpFormatter().renderWrappedText(sb, width, padding, text);
         assertEquals("cut and wrap", expected, sb.toString());
@@ -135,9 +135,9 @@ public class HelpFormatterTest
         final int width = 12;
         final int padding = 0;
         final String text = "This is a test.";
-        final String expected = "This is a" + EOL + 
+        final String expected = "This is a" + EOL +
                           "test.";
-        
+
         final StringBuffer sb = new StringBuffer();
         new HelpFormatter().renderWrappedText(sb, width, padding, text);
         assertEquals("single line text", expected, sb.toString());
@@ -150,9 +150,9 @@ public class HelpFormatterTest
         final int width = 12;
         final int padding = 4;
         final String text = "This is a test.";
-        final String expected = "This is a" + EOL + 
+        final String expected = "This is a" + EOL +
                           "    test.";
-        
+
         final StringBuffer sb = new StringBuffer();
         new HelpFormatter().renderWrappedText(sb, width, padding, text);
         assertEquals("single line padded text", expected, sb.toString());
@@ -169,7 +169,7 @@ public class HelpFormatterTest
         final String expected = "  -p,--period <PERIOD>  PERIOD is time duration of" + EOL +
                           "                        form DATE[-DATE] where DATE" + EOL +
                           "                        has form YYYY[MM[DD]]";
-        
+
         final StringBuffer sb = new StringBuffer();
         new HelpFormatter().renderWrappedText(sb, width, padding, text);
         assertEquals("single line padded text 2", expected, sb.toString());
@@ -202,7 +202,7 @@ public class HelpFormatterTest
         final String expected = "aaaa aaaa aaaa" + EOL +
                           "    aaaaaa" + EOL +
                           "    aaaaa";
-        
+
         final StringBuffer sb = new StringBuffer();
         new HelpFormatter().renderWrappedText(sb, width, padding, text);
         assertEquals("multi-line padded text", expected, sb.toString());
@@ -217,8 +217,8 @@ public class HelpFormatterTest
         final int descPad = 3;
         final String lpad = hf.createPadding(leftPad);
         final String dpad = hf.createPadding(descPad);
-        Options options = null;
-        String expected = null;
+        Options options;
+        String expected;
 
         options = new Options().addOption("a", false, "aaaa aaaa aaaa aaaa aaaa");
         expected = lpad + "-a" + dpad + "aaaa aaaa aaaa aaaa aaaa";
@@ -287,7 +287,7 @@ public class HelpFormatterTest
     public void testAutomaticUsage() throws Exception
     {
         final HelpFormatter hf = new HelpFormatter();
-        Options options = null;
+        Options options;
         String expected = "usage: app [-a]";
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         final PrintWriter pw = new PrintWriter(out);
@@ -339,6 +339,7 @@ public class HelpFormatterTest
         final HelpFormatter helpFormatter = new HelpFormatter();
         helpFormatter.setOptionComparator(new Comparator<Option>()
         {
+            @Override
             public int compare(final Option opt1, final Option opt2)
             {
                 // reverses the functionality of the default comparator
@@ -430,10 +431,10 @@ public class HelpFormatterTest
     public void testDefaultArgName()
     {
         final Option option = Option.builder("f").hasArg().required(true).build();
-        
+
         final Options options = new Options();
         options.addOption(option);
-        
+
         final StringWriter out = new StringWriter();
 
         final HelpFormatter formatter = new HelpFormatter();
@@ -482,7 +483,7 @@ public class HelpFormatterTest
         formatter.setWidth(80);
         assertEquals("width", 80, formatter.getWidth());
     }
-    
+
     @Test
     public void testHeaderStartingWithLineSeparator()
     {
@@ -542,7 +543,7 @@ public class HelpFormatterTest
                 "  -c        ccccccc" + EOL
                 , out.toString());
     }
-    
+
     @Test
     public void testOptionWithoutShortFormat2()
     {
@@ -551,38 +552,38 @@ public class HelpFormatterTest
         final Option version = new Option("v", "version", false, "print version information");
         final Option newRun = new Option("n", "new", false, "Create NLT cache entries only for new items");
         final Option trackerRun = new Option("t", "tracker", false, "Create NLT cache entries only for tracker items");
-        
+
         final Option timeLimit = Option.builder("l")
                                  .longOpt("limit")
                                  .hasArg()
                                  .valueSeparator()
                                  .desc("Set time limit for execution, in mintues")
                                  .build();
-        
+
         final Option age = Option.builder("a").longOpt("age")
                                         .hasArg()
                                         .valueSeparator()
                                         .desc("Age (in days) of cache item before being recomputed")
                                         .build();
-        
+
         final Option server = Option.builder("s").longOpt("server")
                                            .hasArg()
                                            .valueSeparator()
                                            .desc("The NLT server address")
                                            .build();
-        
+
         final Option numResults = Option.builder("r").longOpt("results")
                                                .hasArg()
                                                .valueSeparator()
                                                .desc("Number of results per item")
                                                .build();
-        
+
         final Option configFile = Option.builder().longOpt("config")
                                             .hasArg()
                                             .valueSeparator()
                                             .desc("Use the specified configuration file")
                                             .build();
-        
+
         final Options mOptions = new Options();
         mOptions.addOption(help);
         mOptions.addOption(version);
@@ -593,7 +594,7 @@ public class HelpFormatterTest
         mOptions.addOption(server);
         mOptions.addOption(numResults);
         mOptions.addOption(configFile);
-        
+
         final HelpFormatter formatter = new HelpFormatter();
         final String EOL = System.getProperty("line.separator");
         final StringWriter out = new StringWriter();
@@ -614,7 +615,7 @@ public class HelpFormatterTest
                 "footer"+EOL
                 ,out.toString());
     }
-    
+
     @Test
     public void testHelpWithLongOptSeparator() throws Exception
     {
@@ -622,12 +623,12 @@ public class HelpFormatterTest
         options.addOption( "f", true, "the file" );
         options.addOption(Option.builder("s").longOpt("size").desc("the size").hasArg().argName("SIZE").build());
         options.addOption(Option.builder().longOpt("age").desc("the age").hasArg().build());
-        
+
         final HelpFormatter formatter = new HelpFormatter();
         assertEquals(HelpFormatter.DEFAULT_LONG_OPT_SEPARATOR, formatter.getLongOptSeparator());
         formatter.setLongOptSeparator("=");
         assertEquals("=", formatter.getLongOptSeparator());
-        
+
         final StringWriter out = new StringWriter();
 
         formatter.printHelp(new PrintWriter(out), 80, "create", "header", options, 2, 2, "footer");
@@ -649,14 +650,14 @@ public class HelpFormatterTest
         options.addOption( "f", true, "the file" );
         options.addOption(Option.builder("s").longOpt("size").desc("the size").hasArg().argName("SIZE").build());
         options.addOption(Option.builder().longOpt("age").desc("the age").hasArg().build());
-        
+
         final HelpFormatter formatter = new HelpFormatter();
         formatter.setLongOptSeparator("=");
-        
+
         final StringWriter out = new StringWriter();
-        
+
         formatter.printUsage(new PrintWriter(out), 80, "create", options);
-        
+
         assertEquals("usage: create [--age=<arg>] [-f <arg>] [-s <SIZE>]", out.toString().trim());
     }
 }
